@@ -1,0 +1,157 @@
+import random
+import statistics
+gsd=[]
+gscrits=[]
+gshits=[]
+axed=[]
+axecrits=[]
+axehits=[]
+crit=0
+def crithit():
+    crit1=random.randint(1,20)
+    crit2=random.randint(1,20)
+    if crit1>crit2:
+        if crit1>18:
+            crit=1
+        else:
+            crit=0
+    if crit2>crit1:
+        if crit2>18:
+            crit=1
+        else:
+            crit=0
+    if crit1==crit2:
+        if crit1>18:
+            crit=1
+        else:
+            crit=0
+    return crit
+
+def roll(dice1,dice2):
+    reroll=1
+    fr=random.randint(dice1,dice2)
+    if fr==1:
+        while reroll>0:
+            reroll=reroll-1
+            fr=random.randint(dice1,dice2)
+    if fr==2:
+        while reroll>0:
+            reroll=reroll-1
+            fr=random.randint(dice1,dice2)
+    return fr
+def greatsword():
+    n1=5000
+    print("Number of iterations ",n1)
+    while n1>0:
+        n1=n1-1
+        critcounter=0
+        a=2
+        damagesword=[]
+        while a>0:
+            a=a-1
+            damage1=0
+            damage2=0
+            damage3=0
+            damage4=0
+            if crithit()==1:
+                
+                if critcounter==0:
+                    critcounter=1
+                    a=a+1
+                    dam1=roll(1,6)
+                    dam2=roll(1,6)
+                    dam3=roll(1,6)
+                    dam4=roll(1,6)
+                    damage1=dam1+dam2+dam3+dam4
+                    gscrits.append(1)
+                    gshits.append(1)
+                else:
+                    dam1=roll(1,6)
+                    dam2=roll(1,6)
+                    dam3=roll(1,6)
+                    dam4=roll(1,6)
+                    damage2=dam1+dam2+dam3+dam4
+                    gscrits.append(1)
+                    gshits.append(1)
+            else:
+                    dam1=roll(1,6)
+                    dam2=roll(1,6)
+                    damage3=dam1+dam2
+                    gshits.append(1)
+            damagesword.append(damage1+damage2+damage3+damage4)
+        gsd.append(sum(damagesword))
+    print("Greatsword damage total=",sum(gsd))
+    print("Greatsword damage is=",statistics.mean(gsd))
+def axe():
+    n1=5000
+    print("Number of iterations ",n1)
+    while n1>0:
+        n1=n1-1
+        critcounter=0
+        a=2
+        damage=[]
+        while a>0:
+            a=a-1
+            damage1=0
+            damage2=0
+            damage3=0
+            damage4=0
+            if crithit()==1:
+                
+                if critcounter==0:
+                    critcounter=1
+                    a=a+1
+                    dam1=roll(1,12)
+                    dam2=roll(1,12)
+                    dam3=roll(1,12)
+                    damage1=dam1+dam2+dam3
+                    axecrits.append(1)
+                    axehits.append(1)
+                else:
+                    dam1=roll(1,12)
+                    dam2=roll(1,12)
+                    dam3=roll(1,12)
+                    damage2=dam1+dam2+dam3
+                    axecrits.append(1)
+                    axehits.append(1)
+            else:
+                    dam1=roll(1,12)
+                    damage3=dam1
+                    axehits.append(1)
+            damage.append(damage1+damage2+damage3+damage4)
+        axed.append(sum(damage))
+    print("Greataxe damage total=",sum(axed))
+    print("Greataxe damage is=",statistics.mean(axed))
+
+greatsword()
+print("Number of crits=",sum(gscrits))
+print("Number of attacks=",sum(gshits))
+print(" ")
+axe()
+print("Number of crits=",sum(axecrits))
+print("Number of attacks=",sum(axehits))
+
+'''
+testlist=[]
+def test():
+    testcounter=1000
+    while testcounter>0:
+        testcounter=testcounter-1
+        tv1=roll(1,6)
+        tv2=roll(1,6)
+        tv3=roll(1,6)
+        tv4=roll(1,6)
+        tv5=roll(1,6)
+        tv6=roll(1,6)
+        tv7=roll(1,6)
+        tv8=roll(1,6)
+        testvalue=tv1+tv2+tv3+tv4+tv5+tv6+tv7+tv8
+        testlist.append(testvalue)
+    print("Median of testvalue is=",statistics.mean(testlist))
+    
+test()
+test()
+test()
+test()
+test()
+'''
