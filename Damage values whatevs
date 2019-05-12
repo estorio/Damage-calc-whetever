@@ -1,0 +1,136 @@
+import random
+import statistics
+gsd=[]
+axed=[]
+crit=0
+def crithit():
+    crit1=random.randint(1,20)
+    crit2=random.randint(1,20)
+    if crit1>crit2:
+        if crit1>18:
+            crit=1
+        else:
+            crit=0
+    if crit2>crit1:
+        if crit2>18:
+            crit=1
+        else:
+            crit=0
+    if crit1==crit2:
+        if crit1>18:
+            crit=1
+        else:
+            crit=0
+    return crit
+
+def roll(dice1,dice2):
+    reroll=1
+    fr=random.randint(dice1,dice2)
+    if fr==1:
+        while reroll>0:
+            reroll=reroll-1
+            fr=random.randint(dice1,dice2)
+    if fr==2:
+        while reroll>0:
+            reroll=reroll-1
+            fr=random.randint(dice1,dice2)
+    return fr
+def greatsword():
+    n=500
+    while n>0:
+        n=n-1
+        critcounter=0
+        damage1=0
+        damage2=0
+        damage3=0
+        damage4=0
+        a=2
+        hit=0
+        while a>0:
+            a=a-1
+            if crithit()==1:
+                
+                if critcounter==0:
+                    critcounter=1
+                    a=a+1
+                    dam1=roll(1,6)
+                    dam2=roll(1,6)
+                    dam3=roll(1,6)
+                    dam4=roll(1,6)
+                    damage1=dam1+dam2+dam3+dam4
+                else:
+                    dam1=roll(1,6)
+                    dam2=roll(1,6)
+                    dam3=roll(1,6)
+                    dam4=roll(1,6)
+                    damage2=dam1+dam2+dam3+dam4
+            else:
+                if hit==0:
+                    hit=1
+                    dam1=roll(1,6)
+                    dam2=roll(1,6)
+                    damage3=dam1+dam2
+                if hit==1:
+                    dam1=roll(1,6)
+                    dam2=roll(1,6)
+                    damage4=dam1+dam2
+            damage=damage1+damage2+damage3+damage4
+        gsd.append(damage)
+    print("Greatsword damage is=",statistics.mean(gsd))
+def axe():
+    n1=500
+    while n1>0:
+        n1=n1-1
+        critcounter=0
+        damage1=0
+        damage2=0
+        damage3=0
+        damage4=0
+        a=2
+        hit=0
+        while a>0:
+            a=a-1
+            if crithit()==1:
+                
+                if critcounter==0:
+                    critcounter=1
+                    a=a+1
+                    dam1=roll(1,12)
+                    dam2=roll(1,12)
+                    dam3=roll(1,12)
+                    damage1=dam1+dam2+dam3
+                else:
+                    dam1=roll(1,12)
+                    dam2=roll(1,12)
+                    dam3=roll(1,12)
+                    damage2=dam1+dam2+dam3
+            else:
+                if hit==0:
+                    hit=1
+                    dam1=roll(1,12)
+                    damage3=dam1
+                if hit==1:
+                    dam1=roll(1,12)
+                    damage4=dam1
+            damage=damage1+damage2+damage3+damage4
+        axed.append(damage)
+    print("Greataxe damage is=",statistics.mean(axed))
+
+'''greatsword()
+axe()'''
+testlist=[]
+def test():
+    testcounter=1000
+    while testcounter>0:
+        testcounter=testcounter-1
+        testvalue1=roll(1,6)
+        testvalue2=roll(1,6)
+        testvalue=testvalue1+testvalue2
+        testlist.append(testvalue)
+    print("Median of testvalue is=",statistics.mean(testlist))
+    
+test()
+test()
+test()
+test()
+test()
